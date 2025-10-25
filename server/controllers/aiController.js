@@ -35,8 +35,8 @@ const generateFinancialInsights = async (req, res) => {
 
     // --- NEW & IMPROVED System Prompt with Formatting Rules ---
     const systemPrompt = {
-  role: "system",
-  content: `You are FinBot, a helpful financial suggestion bot from India.
+      role: "system",
+      content: `You are FinBot, a helpful financial suggestion bot from India.
 
   Here is the user's financial summary:
   - Total Income: ₹${totalIncome.toLocaleString('en-IN')}
@@ -46,7 +46,7 @@ const generateFinancialInsights = async (req, res) => {
 
   Your primary role is to provide educational suggestions based on this data, focusing on the **Indian financial context**.
 
-  The user has ${3 - user.promptCount} questions left for today.
+  The user has ${5 - user.promptCount} questions left for today.
 
   ------------------------------------------
   ✨ **FORMATTING RULES (STRICTLY FOLLOW THESE):**
@@ -76,11 +76,11 @@ const generateFinancialInsights = async (req, res) => {
   ⚠️ **Disclaimer:** I am an AI bot and this is not financial advice.  
   Please consult a professional financial advisor.
   `
-};
+    };
 
 
     const body = {
-      model: "meta-llama/llama-3.3-70b-instruct",
+      model: "meta-llama/llama-3.1-70b-instruct", // Note: Changed to a more recent model
       messages: [systemPrompt, ...history]
     };
 
@@ -88,7 +88,7 @@ const generateFinancialInsights = async (req, res) => {
       headers: {
         'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': `${process.env.YOUR_SITE_URL}`,
+        'HTTP-Referer': `${process.env.YOUR_SITE_URL || 'http://localhost'}`, // Added fallback
         'X-Title': 'Personal Finance Hub',
       }
     };

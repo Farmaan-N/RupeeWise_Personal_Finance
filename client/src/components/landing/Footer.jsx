@@ -3,6 +3,27 @@ import React from 'react';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 64; // Height of your fixed header
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleNavClick = (e, sectionId) => {
+    e.preventDefault();
+    scrollToSection(sectionId);
+  };
+
   return (
     <footer className="bg-gray-900 text-gray-400 border-t border-gray-700 mt-auto"> {/* Keep mt-auto */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -17,14 +38,34 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Column 2: Quick Links (Placeholders) */}
+          {/* Column 2: Quick Links */}
           <div>
             <h5 className="text-sm font-semibold text-gray-200 tracking-wider uppercase mb-4">Links</h5>
             <ul className="space-y-3 text-sm">
-              <li><a href="#features" className="hover:text-white transition-colors duration-200">Features</a></li>
-              <li><a href="#" className="hover:text-white transition-colors duration-200">Pricing</a></li>
-              <li><a href="#" className="hover:text-white transition-colors duration-200">About</a></li>
-              {/* Add more relevant links if desired */}
+              <li>
+                <button
+                  onClick={(e) => handleNavClick(e, 'features')}
+                  className="hover:text-white transition-all duration-300 ease-in-out"
+                >
+                  Features
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={(e) => handleNavClick(e, 'pricing')}
+                  className="hover:text-white transition-all duration-300 ease-in-out"
+                >
+                  Pricing
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={(e) => handleNavClick(e, 'about')}
+                  className="hover:text-white transition-all duration-300 ease-in-out"
+                >
+                  About
+                </button>
+              </li>
             </ul>
           </div>
 

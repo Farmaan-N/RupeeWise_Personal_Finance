@@ -12,7 +12,7 @@ const Reminder = require('../models/reminderModel');
 router.post('/register', async (req, res) => {
   const { name, email, password } = req.body; // Add username
 
-  if (!name ||  !email || !password) {
+  if (!name || !email || !password) {
     return res.status(400).json({ message: 'Please enter all fields' });
   }
   try {
@@ -29,6 +29,7 @@ router.post('/register', async (req, res) => {
       token: jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '30d' }),
     });
   } catch (error) {
+    console.error('Registration Error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -45,12 +46,14 @@ router.post('/login', async (req, res) => {
         name: user.name,
         email: user.email,
         promptCount: user.promptCount,
+        lastPromptDate: user.lastPromptDate, // Send lastPromptDate on login
         token: jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '30d' }),
       });
     } else {
       res.status(401).json({ message: 'Invalid email or password' });
     }
   } catch (error) {
+    console.error('Login Error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -70,12 +73,14 @@ router.put('/profile', protect, async (req, res) => {
         name: updatedUser.name,
         email: updatedUser.email,
         promptCount: updatedUser.promptCount,
-        token: jwt.sign({ id: updatedUser._id }, process.env.JWT_SECRET, { expiresIn: '30d' }),
+        lastPromptDate: updatedUser.lastPromptDate,
+        token: req.headers.authorization.split(' ')[1], // Send back the same token
       });
     } else {
       res.status(404).json({ message: 'User not found' });
     }
   } catch (error) {
+    console.error('Profile Update Error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -84,6 +89,11 @@ router.put('/profile', protect, async (req, res) => {
 // @route   PUT /api/users/change-password
 router.put('/change-password', protect, async (req, res) => {
   const { currentPassword, newPassword } = req.body;
+
+  if (!currentPassword || !newPassword) {
+    return res.status(400).json({ message: 'Please provide current and new passwords.'})
+  }
+
   try {
     const user = await User.findById(req.user.id);
     if (user && (await bcrypt.compare(currentPassword, user.password))) {
@@ -94,10 +104,13 @@ router.put('/change-password', protect, async (req, res) => {
       res.status(401).json({ message: 'Invalid current password' });
     }
   } catch (error) {
+    console.error('Password Change Error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
 
+// @desc    Delete user account and all data
+// @route   DELETE /api/users/profile
 router.delete('/profile', protect, async (req, res) => {
   try {
     // 1. Delete all transactions associated with the user
@@ -109,7 +122,7 @@ router.delete('/profile', protect, async (req, res) => {
     // 3. Delete the user themselves
     await User.findByIdAndDelete(req.user.id);
 
-    res.json({ message: 'User account and all associated data deleted successfully.We are sorry to see you go' });
+    res.json({ message: 'User account and all associated data deleted successfully. We are sorry to see you go' });
   } catch (error) {
     console.error('Error deleting user account:', error);
     res.status(500).json({ message: 'Server error while deleting account.' });
@@ -117,3 +130,4 @@ router.delete('/profile', protect, async (req, res) => {
 });
 
 module.exports = router;
+

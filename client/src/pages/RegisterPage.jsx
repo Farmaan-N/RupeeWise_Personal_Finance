@@ -39,7 +39,22 @@ const RegisterPage = () => {
     <div className="relative min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4 font-sans">
       
       {/* Position the App Name absolutely in the top-left */}
-      <div className="absolute top-1 left-2 sm:top-2 sm:left-3 lg:top-3 lg:left-4"> <span className="text-sm sm:text-base lg:text-lg text-gray-900"> <span className="font-bold">Rupee</span> <span className="font-normal"> Wise</span> </span> </div>
+      <div className="absolute top-1 left-2 sm:top-2 sm:left-3 lg:top-3 lg:left-4"> 
+        <span className="text-sm sm:text-base lg:text-lg text-gray-900"> 
+          <span className="font-bold">Rupee</span> <span className="font-normal"> Wise</span> 
+        </span> 
+      </div>
+
+      {/* Back Button */}
+      <button 
+        onClick={() => showLoaderAndNavigate('/')}
+        className="absolute top-2 right-2 sm:top-3 sm:right-3 lg:top-4 lg:right-4 text-gray-600 hover:text-gray-900 transition-colors duration-200"
+        aria-label="Back to Home"
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
 
       {/* Register Card Container */}
       <div className="w-full max-w-md">
@@ -50,7 +65,7 @@ const RegisterPage = () => {
           {error && <p className="bg-red-100 text-red-700 p-3 rounded-md mb-4 text-center text-sm">{error}</p>}
           <form onSubmit={handleSubmit} className="space-y-4"> {/* Adjusted spacing */}
             <div>
-              <label className="block text-gray-600 mb-1 text-sm font-medium" htmlFor="name">Display Name</label>
+              <label className="block text-gray-600 mb-1 text-sm font-medium" htmlFor="name">Full Name</label>
               <input
                 // Updated Input Styles
                 className="w-full bg-gray-50 border border-gray-300 text-gray-900 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
