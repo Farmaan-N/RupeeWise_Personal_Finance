@@ -88,7 +88,7 @@ const generateFinancialInsights = async (req, res) => {
       headers: {
         'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': `${process.env.YOUR_SITE_URL || 'http://localhost'}`, // Added fallback
+        'HTTP-Referer': `${process.env.YOUR_SITE_URL }`, // Added fallback
         'X-Title': 'Personal Finance Hub',
       }
     };
