@@ -57,7 +57,7 @@ const CalendarPage = () => {
   const handleSaveReminder = async (reminderData) => {
     const config = { headers: { Authorization: `Bearer ${user.token}` } };
     if (reminderData._id) { // Update existing reminder
-      await axios.put(`http://localhost:5000/api/reminders/${reminderData._id}`, reminderData, config);
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/reminders/${reminderData._id}`, reminderData, config);
     } else { // Create new reminder
       await axios.post('http://localhost:5000/api/reminders', reminderData, config);
     }
@@ -67,7 +67,7 @@ const CalendarPage = () => {
   const handleDeleteReminder = async (id) => {
     if (window.confirm('Are you sure you want to delete this reminder?')) {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
-      await axios.delete(`http://localhost:5000/api/reminders/${id}`, config);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/reminders/${id}`, config);
       fetchReminders();
     }
   };

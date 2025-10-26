@@ -23,7 +23,7 @@ const ProfilePage = () => {
     setNameMessage({ type: '', text: '' });
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
-      const { data } = await axios.put('http://localhost:5000/api/users/profile', { name }, config);
+      const { data } = await axios.put(`${import.meta.env.VITE_API_URL}/api/users/profile`, { name }, config);
       const updatedUser = { ...user, name: data.name, token: data.token };
       login(updatedUser);
       setNameMessage({ type: 'success', text: 'Name updated successfully!' });
@@ -42,7 +42,7 @@ const ProfilePage = () => {
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
       const body = { currentPassword, newPassword };
-      await axios.put('http://localhost:5000/api/users/change-password', body, config);
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/users/change-password`, body, config);
       setPasswordMessage({ type: 'success', text: 'Password changed! Logging you out...' });
       setTimeout(() => {
         logout();
@@ -58,7 +58,7 @@ const ProfilePage = () => {
     if (window.confirm('Are you absolutely sure? This will permanently delete your account and all of your data. This action cannot be undone.')) {
       try {
         const config = { headers: { Authorization: `Bearer ${user.token}` } };
-        await axios.delete('http://localhost:5000/api/users/profile', config);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/api/users/profile`, config);
         logout();
         navigate('/login');
       } catch (error) {

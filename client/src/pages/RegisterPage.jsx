@@ -21,10 +21,10 @@ const RegisterPage = () => {
 
     try {
       const config = { headers: { 'Content-Type': 'application/json' } };
-      const { data } = await axios.post(
-        'http://localhost:5000/api/users/register',
-        { name, email, password },
-        config
+      await axios.post(
+     `${import.meta.env.VITE_API_URL}/api/users/register`,
+      { name, email, password },
+      config
       );
       login(data);
       showLoaderAndNavigate('/dashboard');

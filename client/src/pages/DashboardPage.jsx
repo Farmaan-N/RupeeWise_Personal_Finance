@@ -18,8 +18,7 @@ const DashboardPage = () => {
       if (!user || !user.token) return;
       try {
         const config = { headers: { Authorization: `Bearer ${user.token}` } };
-        const { data } = await axios.get('http://localhost:5000/api/transactions', config);
-        setTransactions(data);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/transactions`, config);        setTransactions(data);
       } catch (error) {
         console.error('Failed to fetch transactions', error);
         if (error.response && (error.response.status === 401 || error.response.status === 403)) {
@@ -34,7 +33,7 @@ const DashboardPage = () => {
     const fetchTransactions = async () => {
         if (!user || !user.token) return;
         const config = { headers: { Authorization: `Bearer ${user.token}` } };
-        const { data } = await axios.get('http://localhost:5000/api/transactions', config);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/transactions`, config);
         setTransactions(data);
     };
     fetchTransactions();
@@ -45,7 +44,7 @@ const DashboardPage = () => {
     if (window.confirm('Are you sure you want to delete this transaction?')) {
       try {
         const config = { headers: { Authorization: `Bearer ${user.token}` } };
-        await axios.delete(`http://localhost:5000/api/transactions/${id}`, config);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/api/transactions/${id}`, config);
         // Refresh the transaction list by filtering out the deleted one for an instant UI update
         setTransactions(transactions.filter((t) => t._id !== id));
       } catch (error) {
