@@ -24,7 +24,7 @@ const AIChatbot = () => {
     // Using the exact try/catch logic you provided
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
-      const { data: aiMessage } = await axios.post('http://localhost:5000/api/ai/chat', { history: newHistory }, config);
+      const { data: aiMessage } = await axios.post(`${import.meta.env.VITE_API_URL}/api/ai/chat`, { history: newHistory }, config);
       setHistory(prev => [...prev, aiMessage]);
       const updatedUser = { ...user, promptCount: promptsUsed + 1 };
       login(updatedUser);

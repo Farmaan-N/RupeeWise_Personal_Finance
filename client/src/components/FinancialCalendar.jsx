@@ -14,7 +14,7 @@ const FinancialCalendar = () => {
   // Fetch reminders (no change in this function)
   const fetchReminders = async () => {
     const config = { headers: { Authorization: `Bearer ${user.token}` } };
-    const { data } = await axios.get('http://localhost:5000/api/reminders', config);
+    const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/reminders`, config);
     setReminders(data);
   };
 

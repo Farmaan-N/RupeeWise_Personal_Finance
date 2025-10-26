@@ -14,7 +14,7 @@ const TransactionForm = ({ onTransactionAdded }) => {
     const transactionData = { type, category, amount: Number(amount), date };
     const config = { headers: { Authorization: `Bearer ${user.token}` } };
     try {
-      await axios.post('http://localhost:5000/api/transactions', transactionData, config);
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/transactions`, transactionData, config);
       onTransactionAdded();
       setCategory(''); setAmount(''); setType('expense'); setDate(new Date().toISOString().slice(0, 10)); // Reset form fully
     } catch (error) {
