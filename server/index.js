@@ -25,13 +25,10 @@ const allowed = new Set(
     .map((s) => s.replace(/\/$/, ''))
 );
 
+// TEMPORARY FIX - Hardcode the origin
 app.use(
   cors({
-    origin: (origin, cb) => {
-      if (!origin) return cb(null, true); // allow curl/Postman
-      const o = origin.replace(/\/$/, '');
-      return cb(null, allowed.has(o));
-    },
+    origin: 'https://rupeewisefin.netlify.app',
     credentials: true,
   })
 );
