@@ -2,13 +2,13 @@
   # Tell Netlify to look in the client folder for your app
   base = "client" 
   
-  # Tell Netlify where your built files are (Vite's default)
-  publish = "client/dist" 
+  # Tell Netlify where your built files are (relative to "base")
+  publish = "dist" 
   
   # Tell Netlify how to build your app
   command = "npm run build" 
 
-
+# This is the routing fix:
 [[redirects]]
   from = "/*"
   to = "/index.html"
