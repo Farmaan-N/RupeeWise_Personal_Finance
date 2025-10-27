@@ -10,7 +10,9 @@ const Reminder = require('../models/reminderModel');
 // @desc    Register a new user
 // @route   POST /api/users/register
 router.post('/register', async (req, res) => {
+  console.log('Register attempt:', req.body);
   const { name, email, password } = req.body; // Add username
+
 
   if (!name || !email || !password) {
     return res.status(400).json({ message: 'Please enter all fields' });

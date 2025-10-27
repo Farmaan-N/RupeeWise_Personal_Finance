@@ -1,0 +1,15 @@
+[build]
+  # Tell Netlify to look in the client folder for your app
+  base = "client" 
+  
+  # Tell Netlify where your built files are (Vite's default)
+  publish = "client/dist" 
+  
+  # Tell Netlify how to build your app
+  command = "npm run build" 
+
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
