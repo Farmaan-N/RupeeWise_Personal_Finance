@@ -19,7 +19,7 @@ const LoginPage = () => {
     setError('');
 
     try {
-      await axios.post(
+      const { data } = await axios.post(
       `${import.meta.env.VITE_API_URL}/api/users/login`,
        { email, password }
       );
