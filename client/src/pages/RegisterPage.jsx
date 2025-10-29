@@ -21,11 +21,11 @@ const RegisterPage = () => {
 
     try {
       const config = { headers: { 'Content-Type': 'application/json' } };
-      await axios.post(
-     `${import.meta.env.VITE_API_URL}/api/users/register`,
-      { name, email, password },
-      config
-      );
+      const { data } = await axios.post(
+  `${import.meta.env.VITE_API_URL}/api/users/register`,
+  { name, email, password },
+  config
+);
       login(data);
       showLoaderAndNavigate('/dashboard');
     } catch (err) {
