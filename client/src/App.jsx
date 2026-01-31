@@ -14,6 +14,7 @@ import DashboardPage from './pages/DashboardPage';
 import CalendarPage from './pages/CalendarPage';
 import CalculatorsPage from './pages/CalculatorsPage';
 import ProfilePage from './pages/ProfilePage';
+import ErrorElement from './errorElement';
 
 function App() {
   const { isLoading } = useLoading();
@@ -42,6 +43,7 @@ function App() {
                 <Route path="/profile" element={<ProfilePage />} />
               </Route>
             </Route>
+            <Route path="*" element={<ErrorElement />} />
           </Routes>
         </div>
       )}
