@@ -14,7 +14,7 @@ import DashboardPage from './pages/DashboardPage';
 import CalendarPage from './pages/CalendarPage';
 import CalculatorsPage from './pages/CalculatorsPage';
 import ProfilePage from './pages/ProfilePage';
-import ErrorElement from './errorElement';
+import ErrorElement from './ErrorElement';
 
 function App() {
   const { isLoading } = useLoading();
