@@ -56,12 +56,12 @@ const LoginPage = () => {
       <div className="w-full max-w-md">
         <div className="bg-white p-8 rounded-lg shadow-md border border-gray-200">
           <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Login to Your Account</h2>
-          {error && <p className="bg-red-100 text-red-700 p-3 rounded-md mb-4 text-center text-sm">{error}</p>}
+          {error && <p className="bg-red-100 text-teal-700 p-3 rounded-md mb-4 text-center text-sm">{error}</p>}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="block text-gray-600 mb-1 text-sm font-medium" htmlFor="email">Email Address</label>
               <input
-                className="w-full bg-gray-50 border border-gray-300 text-gray-900 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                className="w-full bg-gray-50 border border-gray-300 text-gray-900 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 type="email"
                 id="email"
                 value={email}
@@ -72,7 +72,7 @@ const LoginPage = () => {
             <div>
               <label className="block text-gray-600 mb-1 text-sm font-medium" htmlFor="password">Password</label>
               <input
-                className="w-full bg-gray-50 border border-gray-300 text-gray-900 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                className="w-full bg-gray-50 border border-gray-300 text-gray-900 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 type="password"
                 id="password"
                 value={password}
@@ -83,14 +83,14 @@ const LoginPage = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-md transition duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
+              className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-4 rounded-md transition duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
               {loading ? 'Logging in...' : 'Login'}
             </button>
           </form>
           <p className="mt-6 text-center text-sm text-gray-500">
             Don't have an account?{' '}
-            <LoaderLink to="/register" className="font-medium text-red-600 hover:underline">
+            <LoaderLink to="/register" className="font-medium text-teal-600 hover:underline">
               Sign up
             </LoaderLink>
           </p>

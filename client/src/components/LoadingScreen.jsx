@@ -26,7 +26,7 @@ const LoadingScreen = () => {
     >
       {/* The new animated Rupee symbol */}
       <motion.div
-        className="text-5xl font-bold text-red-500"
+        className="text-5xl font-bold text-teal-500"
         variants={iconVariants}
         animate="pulsing"
       >

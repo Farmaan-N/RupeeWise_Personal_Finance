@@ -70,7 +70,7 @@ const Header = () => {
                 <button
                   key={link.name}
                   onClick={(e) => handleNavClick(e, link.id)}
-                  className="py-2 border-b-2 border-transparent text-gray-600 hover:border-red-500 hover:text-red-500 transition-all duration-300 ease-in-out"
+                  className="py-2 border-b-2 border-transparent text-gray-600 hover:border-teal-500 hover:text-teal-500 transition-all duration-300 ease-in-out"
                 >
                   {link.name}
                 </button>
